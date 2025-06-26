@@ -34,13 +34,7 @@ var rootCmd = &cobra.Command{
 			TermYears:       termYears,
 			InterestPaid:    interestPaid,
 		}
-		err := td.ValidateArguments()
-		if err != nil {
-			return err
-		}
-
-		td.PrintTotalBalance()
-		return nil
+		return td.ValidateAndPrintBalance()
 	},
 }
 

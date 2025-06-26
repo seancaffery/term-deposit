@@ -51,8 +51,13 @@ func TestTermDeposit_ValidateArguments(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			td := TermDeposit{}
-			err := td.ValidateArguments()
+			td := TermDeposit{
+				StartingBalance: tt.startAmount,
+				InterestRate:    tt.interestRate,
+				TermYears:       tt.term,
+				InterestPaid:    tt.interestPaymentArg,
+			}
+			err := td.validateArguments()
 			if tt.expectedError != nil {
 				assert.ErrorContains(t, err, tt.expectedError.Error())
 			} else {
