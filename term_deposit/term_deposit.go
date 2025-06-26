@@ -2,13 +2,23 @@ package term_deposit
 
 import (
 	"errors"
+	"fmt"
 )
 
 type TermDeposit struct {
+	StartingBalance float64
+	InterestRate    float64
+	TermYears       int
+	InterestPaid    string
 }
 
 type Validator interface {
 	validate() error
+}
+
+func (td TermDeposit) PrintTotalBalance() {
+	resultingBalance := TotalBalance(td.StartingBalance, td.InterestRate, td.TermYears, td.InterestPaid)
+	fmt.Printf("Total balance deposit maturity $%0.0f\n", resultingBalance)
 }
 
 func (td TermDeposit) ValidateArguments(startAmount float64, interestRate float64, term int, interestPaymentArg string) error {
@@ -31,4 +41,3 @@ func (td TermDeposit) ValidateArguments(startAmount float64, interestRate float6
 
 	return errors.Join(errorMessages...)
 }
-

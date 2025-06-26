@@ -4,7 +4,6 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/seancaffery/term-deposit/term_deposit"
@@ -29,13 +28,18 @@ var rootCmd = &cobra.Command{
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	RunE: func(cmd *cobra.Command, args []string) error {
-		td := term_deposit.TermDeposit{}
+		td := term_deposit.TermDeposit{
+			StartingBalance: startingBalance,
+			InterestRate:    interestRate,
+			TermYears:       termYears,
+			InterestPaid:    interestPaid,
+		}
 		err := td.ValidateArguments(startingBalance, interestRate, termYears, interestPaid)
 		if err != nil {
 			return err
 		}
 
-		fmt.Println(term_deposit.TotalBalance(startingBalance, interestRate, termYears, interestPaid))
+		td.PrintTotalBalance()
 		return nil
 	},
 }
