@@ -1,4 +1,4 @@
-package main
+package term_deposit
 
 import "math"
 
@@ -11,13 +11,21 @@ const (
 	maturity
 )
 
+var interestPeriodMapping = map[string]interestPeriod{
+	"monthly":   monthly,
+	"quarterly": quarterly,
+	"yearly":    yearly,
+	"maturity":  maturity,
+}
+
 var interestPaidToPeriods = map[interestPeriod]float64{
 	monthly:   12,
 	quarterly: 4,
 	yearly:    1,
 }
 
-func totalBalance(startAmount float64, interestRate float64, term int, interestPayment interestPeriod) float64 {
+func TotalBalance(startAmount float64, interestRate float64, term int, interestPaymentArg string) float64 {
+	interestPayment := interestPeriodMapping[interestPaymentArg]
 	interestPercentage := (interestRate / 100)
 	if interestPayment == maturity {
 		return startAmount + calculateSimpleInterest(startAmount, interestPercentage, term, interestPayment)

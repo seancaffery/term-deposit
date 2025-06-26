@@ -1,4 +1,4 @@
-package main
+package term_deposit
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -11,33 +11,33 @@ func Test_totalBalance(t *testing.T) {
 	term := 5
 	tests := []struct {
 		name            string
-		interestPayment interestPeriod
+		interestPayment string
 		expectedBalance float64
 	}{
 		{
 			name:            "interest paid at maturity",
-			interestPayment: maturity,
+			interestPayment: "maturity",
 			expectedBalance: 11050,
 		},
 		{
 			name:            "interest paid yearly",
-			interestPayment: yearly,
+			interestPayment: "yearly",
 			expectedBalance: 11095,
 		},
 		{
 			name:            "interest paid monthly",
-			interestPayment: monthly,
+			interestPayment: "monthly",
 			expectedBalance: 11106,
 		},
 		{
 			name:            "interest paid quarterly",
-			interestPayment: quarterly,
+			interestPayment: "quarterly",
 			expectedBalance: 11104,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := totalBalance(float64(startAmount), interestRate, term, tt.interestPayment)
+			got := TotalBalance(float64(startAmount), interestRate, term, tt.interestPayment)
 
 			assert.Equal(t, tt.expectedBalance, got)
 		})
