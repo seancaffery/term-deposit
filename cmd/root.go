@@ -4,24 +4,33 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
 	"os"
 
+	"github.com/seancaffery/term-deposit/term_deposit"
 	"github.com/spf13/cobra"
 )
+
+var interestPaid string
+var termYears int
+var interestRate float64
+var startingBalance float64
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "term-deposit",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "A term deposit total balance calulator",
+	Long: `Calculates the resulting balance for a term deposit given the following:
+- starting balance (e.g. 10000)
+- interest rate (e.g. 1.10)
+- investment term in years (e.g. 3)
+- interest payment frequency (monthly, quarterly, annually, at maturity)
+	`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println(term_deposit.TotalBalance(startingBalance, interestRate, termYears, interestPaid))
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -42,6 +51,17 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.Flags().Float64Var(&startingBalance, "startingBalance", 0.0, "The initial balance of the term deposit")
+	rootCmd.MarkFlagRequired("startingBalance")
+
+	rootCmd.Flags().Float64Var(&interestRate, "interestRate", 1.1, "The interest rate of the term deposit")
+	rootCmd.MarkFlagRequired("interestRate")
+
+	rootCmd.Flags().IntVar(&termYears, "termYears", 3, "The investment term in years")
+	rootCmd.MarkFlagRequired("termYears")
+
+	rootCmd.Flags().StringVar(&interestPaid, "interestPaid", "maturity", "Interest payment frequency. Available values: monthly, quarterly, annually, maturity")
+	rootCmd.MarkFlagRequired("interestPaid")
+
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
 }
