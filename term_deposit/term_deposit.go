@@ -21,15 +21,15 @@ func (td TermDeposit) PrintTotalBalance() {
 	fmt.Printf("Total balance deposit maturity $%0.0f\n", resultingBalance)
 }
 
-func (td TermDeposit) ValidateArguments(startAmount float64, interestRate float64, term int, interestPaymentArg string) error {
+func (td TermDeposit) ValidateArguments() error {
 	validators := []Validator{}
 	errorMessages := []error{}
 
 	validators = append(validators,
-		PositiveValueValidator{"startingBalance", startAmount},
-		PositiveValueValidator{"termYears", float64(term)},
-		PositiveValueValidator{"interestRate", interestRate},
-		InterestPeriodValidator{interestPaymentArg},
+		PositiveValueValidator{"startingBalance", td.StartingBalance},
+		PositiveValueValidator{"termYears", float64(td.TermYears)},
+		PositiveValueValidator{"interestRate", td.InterestRate},
+		InterestPeriodValidator{td.InterestPaid},
 	)
 
 	for _, validator := range validators {

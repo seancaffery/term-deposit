@@ -34,7 +34,7 @@ var rootCmd = &cobra.Command{
 			TermYears:       termYears,
 			InterestPaid:    interestPaid,
 		}
-		err := td.ValidateArguments(startingBalance, interestRate, termYears, interestPaid)
+		err := td.ValidateArguments()
 		if err != nil {
 			return err
 		}
