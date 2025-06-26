@@ -28,8 +28,15 @@ var rootCmd = &cobra.Command{
 	`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
+		td := term_deposit.TermDeposit{}
+		err := td.ValidateArguments(startingBalance, interestRate, termYears, interestPaid)
+		if err != nil {
+			return err
+		}
+
 		fmt.Println(term_deposit.TotalBalance(startingBalance, interestRate, termYears, interestPaid))
+		return nil
 	},
 }
 
