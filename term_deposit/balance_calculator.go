@@ -34,11 +34,23 @@ func TotalBalance(startAmount float64, interestRate float64, term int, interestP
 	return calculateCompoundInterest(startAmount, interestPercentage, term, interestPayment)
 }
 
+// Use compound interest calculation for at maturity interest payment period
+// Formula via https://www.thecalculatorsite.com/finance/calculators/simple-interest-calculator.php
+// A = P(1 + rt)
+//
+// Where:
+//
+// A = the future value
+// P = the initial principal
+// r = annual interest rate (decimal)
+// t = the time in years
 func calculateSimpleInterest(startAmount float64, interestPercentage float64, term int, interestPayment interestPeriod) float64 {
 	return (startAmount * interestPercentage * float64(term))
 }
 
-// A = P x (1 + r)n
+// Use compound interest calculation for interest payment periods other than maturity.
+// Formula via https://moneysmart.gov.au/saving/compound-interest
+// A = P x (1 + r)^n
 //
 // A = ending balance
 // P = starting balance (or principal)
