@@ -9,7 +9,7 @@ A simple term deposit calculator written in Go.
     - error handling and display to the user
     - help message and usage display
     - simpler flag enforcement
-- Input validation is via a `validate() error` interface and joining all encountered errors. This enables composing more complex validations out of smaller building blocks. An extension of the current validations could include something like a `StartingBalanceValidator` which implement `Validator` and internall reference `PositiveValueValidator` and a `MinValueValidator`.
+- Input validation is via a `validate() error` interface and joining all encountered errors. This enables composing more complex validations out of smaller building blocks. An extension of the current validations could include something like a `StartingBalanceValidator` which implement `Validator` and internally reference `PositiveValueValidator` and a `MinValueValidator`.
     - Note: there are some input validations - required argument checks and basic paramater validation - but it is likely that there are inputs that will produce inaccurate results or break the application.
 - The `TermDeposit` struct handles most operations and is the public interface for the total balance calculation. This is on the path to something that I would be happy with but it's not quite there. The idea to is to protect the user from inaccurate / broken results by forcing validation to run first. The current implementation has an awkward interface that binds the validation, calculation and output all together. Returning validated arguments or a `TermDeposit` from the validator could be a way to keep the guarantee but with a better interface. Injecting a presenter or output handler would also improve the situation.
 
