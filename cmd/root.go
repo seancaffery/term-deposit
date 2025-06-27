@@ -56,16 +56,16 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().Float64Var(&startingBalance, "startingBalance", 0.0, "The initial balance of the term deposit")
+	rootCmd.Flags().Float64Var(&startingBalance, "startingBalance", 0, "The initial balance of the term deposit")
 	rootCmd.MarkFlagRequired("startingBalance")
 
-	rootCmd.Flags().Float64Var(&interestRate, "interestRate", 1.1, "The interest rate of the term deposit")
+	rootCmd.Flags().Float64Var(&interestRate, "interestRate", 0, "The interest rate of the term deposit")
 	rootCmd.MarkFlagRequired("interestRate")
 
-	rootCmd.Flags().IntVar(&termYears, "termYears", 3, "The investment term in years")
+	rootCmd.Flags().IntVar(&termYears, "termYears", 0, "The investment term in years")
 	rootCmd.MarkFlagRequired("termYears")
 
-	rootCmd.Flags().StringVar(&interestPaid, "interestPaid", "maturity", "Interest payment frequency. Available values: monthly, quarterly, annually, maturity")
+	rootCmd.Flags().StringVar(&interestPaid, "interestPaid", "", "Interest payment frequency. Available values: monthly, quarterly, annually, maturity")
 	rootCmd.MarkFlagRequired("interestPaid")
 
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
