@@ -20,7 +20,7 @@ type InterestPeriodValidator struct {
 
 func (v InterestPeriodValidator) validate() error {
 	if _, ok := interestPeriodMapping[v.value]; !ok {
-		return fmt.Errorf("interestPaid must be one of: monthly, quarterly, annually, at maturity. Got '%v'", v.value)
+		return fmt.Errorf("interestPaid must be one of: monthly, quarterly, annually, maturity. Got '%v'", v.value)
 	}
 	return nil
 }

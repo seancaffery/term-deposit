@@ -7,21 +7,21 @@ type interestPeriod int
 const (
 	monthly interestPeriod = iota
 	quarterly
-	yearly
+	annually
 	maturity
 )
 
 var interestPeriodMapping = map[string]interestPeriod{
 	"monthly":   monthly,
 	"quarterly": quarterly,
-	"yearly":    yearly,
+	"annually":  annually,
 	"maturity":  maturity,
 }
 
 var interestPaidToPeriods = map[interestPeriod]float64{
 	monthly:   12,
 	quarterly: 4,
-	yearly:    1,
+	annually:  1,
 }
 
 func TotalBalance(startAmount float64, interestRate float64, term int, interestPaymentArg string) float64 {

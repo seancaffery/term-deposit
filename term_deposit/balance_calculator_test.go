@@ -1,8 +1,9 @@
 package term_deposit
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_totalBalance(t *testing.T) {
@@ -20,8 +21,8 @@ func Test_totalBalance(t *testing.T) {
 			expectedBalance: 11050,
 		},
 		{
-			name:            "interest paid yearly",
-			interestPayment: "yearly",
+			name:            "interest paid annually",
+			interestPayment: "annually",
 			expectedBalance: 11095,
 		},
 		{

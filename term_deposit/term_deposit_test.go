@@ -46,7 +46,7 @@ func TestTermDeposit_ValidateArguments(t *testing.T) {
 			interestRate:       1.1,
 			term:               3,
 			interestPaymentArg: "never",
-			expectedError:      fmt.Errorf("interestPaid must be one of: monthly, quarterly, annually, at maturity. Got 'never'"),
+			expectedError:      fmt.Errorf("interestPaid must be one of: monthly, quarterly, annually, maturity. Got 'never'"),
 		},
 	}
 	for _, tt := range tests {
